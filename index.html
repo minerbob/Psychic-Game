@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+    <h1>The Psychic Game</h1>
+    <h4>Guess what letter I'm thinking of</h4>
+    <h4>Wins: <span id="w"></span></h4>
+    <h4>Losses: <span id="l"></span></h4>
+    <h4>Guesses Left: <span id="guessLeft"></span></h4>
+    <h4>Your Guesses so far: <span id="pPick"></span></h4>
+</body>
+
+<script type="text/javascript">
+
+    // initilize the vars we need
+    var computerPick;
+    var choices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+    var playerPick = [];
+    var winC = 0, lossC = 0; guessesLeft = 9;
+    var hisPick = choices[Math.floor(Math.random() * choices.length)];
+
+    // link the the HTML
+    var userPick = document.getElementById("pPick");
+    var win = document.getElementById("w");
+    var loss = document.getElementById("l");
+    var remaining = document.getElementById("guessLeft")
+ 
+     // apply values to link vars.   
+    console.log(hisPick);
+    remaining.textContent = guessesLeft;
+    win.textContent = winC;
+    loss.textContent = lossC;
+
+    document.onkeyup = function (event) {
+
+        playerPick.push(event.key);
+        console.log(playerPick);
+        userPick.textContent = playerPick;
+        guessesLeft--;
+        remaining.textContent = guessesLeft;
+
+        // logic if there is a win
+        if (event.key === hisPick) {
+            winC++;
+            win.textContent = winC;
+            playerPick = [];
+            userPick.textContent = playerPick;
+            guessesLeft = 9;
+            remaining.textContent = guessesLeft;
+            hisPick = choices[Math.floor(Math.random() * choices.length)];
+            console.log(hisPick);
+        }
+
+        // if you run out of guess do this
+        if (guessesLeft < 1) {
+            lossC++
+            loss.textContent = lossC;
+            guessesLeft = 9;
+            remaining.textContent = guessesLeft;
+            hisPick = choices[Math.floor(Math.random() * choices.length)];
+            console.log(hisPick);
+            playerPick = [];
+            userPick.textContent = playerPick;
+        }
+
+
+
+
+
+
+    };
+
+
+
+
+</script>
+
+</html>
